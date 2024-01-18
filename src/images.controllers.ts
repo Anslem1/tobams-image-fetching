@@ -2,14 +2,10 @@ import { Request, Response } from "express";
 import Image from "./image.model";
 
 export const uploadImage = async (req: Request, res: Response) => {
-     // console.log('happy')
      try {
-          res.render("upload"); // Render the template
-
           if (!req.file) {
                throw new Error("No file uploaded");
           }
-
           // Save image details to MongoDB
           await new Image({ image: req.file.path }).save();
 

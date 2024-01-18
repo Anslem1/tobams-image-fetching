@@ -1,4 +1,3 @@
-// app.js
 
 import dotenv from "dotenv";
 import express from "express";
@@ -34,7 +33,8 @@ app.get("/", (req, res) => {
      res.render("home");
 });
 
-console.log(process.env.CLOUDINARY_CLOUD_NAME);
+
+
 
 app.use(cors())
      .use(express.json())

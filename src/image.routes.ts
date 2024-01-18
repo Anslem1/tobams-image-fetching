@@ -10,7 +10,7 @@ router
      .route("/upload")
      .get((req, res) => {
           // Render the "upload" EJS file for GET requests
-          res.render("upload")
+          res.render("upload");
      })
      .post(upload.single("image"), uploadImage);
 

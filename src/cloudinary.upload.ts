@@ -1,6 +1,9 @@
 import cloudinary from "cloudinary";
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 // Initialize Cloudinary
 const cloudinaryConfig = cloudinary.v2;
@@ -17,6 +20,11 @@ const multerStorageEngine = new CloudinaryStorage({
      cloudinary: cloudinaryConfig,
 });
 
+
+console.log(process.env.CLOUDINARY_CLOUD_NAME);
+console.log(process.env.CLOUDINARY_KEY);
+console.log(process.env.CLOUDINARY_SECRET);
+
 // Create multer middleware with Cloudinary storage engine and file type validation
 
 const upload = multer({
@@ -24,7 +32,7 @@ const upload = multer({
      fileFilter: (req, file, callback) => {
          // Check if the file is an image (modify the allowedTypes array as needed)
           const allowedTypes = [
-               "image/jpeg", 
+               "image/jpeg",
                "image/jpg",
                "image/png",
                "image/gif",
