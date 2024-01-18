@@ -1,4 +1,3 @@
-
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
@@ -6,11 +5,16 @@ import cors from "cors";
 import ejs from "ejs";
 import path from "path";
 import imageRoutes from "./src/image.routes";
+import { CustomError } from "./src/errorHandler";
+import { NextFunction, Request, Response } from "express";
 
 dotenv.config();
 
 const app = express();
 const mongoUrl = process.env.MONGO_URL;
+
+
+
 
 if (!mongoUrl) {
      console.error(
@@ -32,7 +36,6 @@ mongoose
 app.get("/", (req, res) => {
      res.render("home");
 });
-
 
 
 

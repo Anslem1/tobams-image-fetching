@@ -9,6 +9,7 @@ exports.cloudinary = cloudinary_1.default;
 const multer_1 = __importDefault(require("multer"));
 const multer_storage_cloudinary_1 = require("multer-storage-cloudinary");
 const dotenv_1 = __importDefault(require("dotenv"));
+const errorHandler_1 = require("./errorHandler");
 dotenv_1.default.config();
 // Initialize Cloudinary
 const cloudinaryConfig = cloudinary_1.default.v2;
@@ -22,7 +23,6 @@ cloudinaryConfig.config({
 const multerStorageEngine = new multer_storage_cloudinary_1.CloudinaryStorage({
     cloudinary: cloudinaryConfig,
 });
-// Create multer middleware with Cloudinary storage engine and file type validation
 const upload = (0, multer_1.default)({
     storage: multerStorageEngine,
     fileFilter: (req, file, callback) => {
@@ -37,10 +37,11 @@ const upload = (0, multer_1.default)({
             "image/webp",
             "image/heif",
         ];
-        if (!allowedTypes.includes(file.mimetype)) {
-            return callback(new Error("Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."));
+        if (allowedTypes.includes(file.mimetype)) {
+            callback(null, true);
         }
-        callback(null, true);
+        const error = new errorHandler_1.CustomError("Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
+        callback(error.toJSON().message);
     },
 });
 exports.upload = upload;

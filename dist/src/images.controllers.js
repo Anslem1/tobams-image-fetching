@@ -17,7 +17,9 @@ const image_model_1 = __importDefault(require("./image.model"));
 const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.file) {
-            throw new Error("No file uploaded");
+            return res.status(400).json({
+                error: "Input cannot be empty. Please select an image",
+            });
         }
         // Save image details to MongoDB
         yield new image_model_1.default({ image: req.file.path }).save();
@@ -25,7 +27,6 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json({ message: "Image uploaded successfully" });
     }
     catch (error) {
-        console.error(error);
         res.status(400).json({ error: error.message || "Invalid request" });
     }
 });
