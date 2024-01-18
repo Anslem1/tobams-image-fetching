@@ -11,7 +11,6 @@ const multer_1 = __importDefault(require("multer"));
 const router = express_1.default.Router();
 // Route to get images
 router.get("/get_image", images_controllers_1.getImages);
-// Route to handle image upload
 router
     .route("/upload")
     .get((req, res) => {
@@ -19,14 +18,11 @@ router
     res.render("upload");
 })
     .post((req, res, next) => {
-    // Use a middleware to handle the file upload
     cloudinary_upload_1.upload.single("image")(req, res, function (error) {
         if (error instanceof multer_1.default.MulterError) {
-            // Handle Multer errors (e.g., file size exceeds limit)
             return res.status(400).json({ error: error.message });
         }
         else if (error) {
-            // Handle other errors (e.g., custom error from fileFilter)
             if (error instanceof errorHandler_1.CustomError) {
                 return res
                     .status(error.status)

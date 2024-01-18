@@ -12,7 +12,7 @@ class CustomError extends Error {
         return {
             name: this.name,
             message: this.message,
-            status: this.status, // Include the 'status' property
+            status: this.status,
         };
     }
 }
