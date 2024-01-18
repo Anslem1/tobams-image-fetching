@@ -34,13 +34,13 @@ const upload = multer({
                "image/webp",
                "image/heif",
           ];
-          if (allowedTypes.includes(file.mimetype)) {
-               callback(null, true);
+          if (!allowedTypes.includes(file.mimetype)) {
+               const error = new CustomError(
+                    "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."
+               );
+               callback(error.toJSON().message);
           }
-          const error = new CustomError(
-               "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."
-          );
-          callback(error.toJSON().message)
+          callback(null, true);
      },
 });
 
