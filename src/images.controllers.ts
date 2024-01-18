@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Image from "./image.model";
 
 
+
 export const uploadImage = async (req: Request, res: Response) => {
      try {
           if (!req.file) {
@@ -14,7 +15,8 @@ export const uploadImage = async (req: Request, res: Response) => {
           // Send JSON response after rendering
           res.status(201).json({ message: "Image uploaded successfully" });
      } catch (error: any) {
-          res.status(400).json({ error: error.message || "Invalid request" });
+          console.log('shit errir')
+          res.status(400).json({ error: error.message || "Bad request" });
      }
 };
 

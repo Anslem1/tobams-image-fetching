@@ -1,9 +1,9 @@
+// cloudinary.upload.js
 import cloudinary from "cloudinary";
-import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import multer from "multer";
 import dotenv from "dotenv";
 import { CustomError } from "./errorHandler";
-import http from "http";
 
 dotenv.config();
 
@@ -26,10 +26,6 @@ const upload = multer({
      storage: multerStorageEngine,
      fileFilter: (req, file, callback) => {
           // Check if the file is an image (modify the allowedTypes array as needed)
-          const server = http.createServer((req, res) => {
-               res.setHeader("Content-Type", "application/json");
-               res.end("");
-          });
           const allowedTypes = [
                "image/jpeg",
                "image/jpg",
@@ -46,10 +42,8 @@ const upload = multer({
                     400,
                     "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."
                );
-
-               return callback(error.toJSON());
+               return callback(error);
           } else {
-               // If the file type is allowed, continue processing
                callback(null, true);
           }
      },

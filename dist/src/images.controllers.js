@@ -27,7 +27,8 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json({ message: "Image uploaded successfully" });
     }
     catch (error) {
-        res.status(400).json({ error: error.message || "Invalid request" });
+        console.log('shit errir');
+        res.status(400).json({ error: error.message || "Bad request" });
     }
 });
 exports.uploadImage = uploadImage;

@@ -18,6 +18,7 @@ if (!mongoUrl) {
      process.exit(1);
 }
 
+
 mongoose
      .connect(mongoUrl)
      .then(() => {
