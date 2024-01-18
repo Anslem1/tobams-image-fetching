@@ -38,9 +38,9 @@ const upload = (0, multer_1.default)({
         ];
         if (!allowedTypes.includes(file.mimetype)) {
             const error = new Error("Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
-            callback(error.message);
+            return callback(error.message);
         }
-        callback(null, true);
+        return callback(null, true);
     },
 });
 exports.upload = upload;
