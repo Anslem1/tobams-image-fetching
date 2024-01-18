@@ -24,9 +24,6 @@ export const getImages = async (req: Request, res: Response) => {
 
           // Render the "images" template with the fetched images
           res.render("images", { images });
-
-          // Send JSON response if needed
-          res.status(200).json({ images });
      } catch (error) {
           console.error("Error fetching images:", error);
 

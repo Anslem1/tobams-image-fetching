@@ -36,8 +36,6 @@ const getImages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const images = yield image_model_1.default.find();
         // Render the "images" template with the fetched images
         res.render("images", { images });
-        // Send JSON response if needed
-        res.status(200).json({ images });
     }
     catch (error) {
         console.error("Error fetching images:", error);
