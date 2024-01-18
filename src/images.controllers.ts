@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import Image from "./image.model";
 
-
-
 export const uploadImage = async (req: Request, res: Response) => {
      try {
           if (!req.file) {
@@ -15,7 +13,6 @@ export const uploadImage = async (req: Request, res: Response) => {
           // Send JSON response after rendering
           res.status(201).json({ message: "Image uploaded successfully" });
      } catch (error: any) {
-          console.log('shit errir')
           res.status(400).json({ error: error.message || "Bad request" });
      }
 };
@@ -26,7 +23,6 @@ export const getImages = async (req: Request, res: Response) => {
           const images = await Image.find();
           // Render the "images" template with the fetched images
           res.render("images", { images });
-
      } catch (error) {
           console.error("Error fetching images:", error);
 
@@ -38,5 +34,3 @@ export const getImages = async (req: Request, res: Response) => {
           }
      }
 };
-
-
