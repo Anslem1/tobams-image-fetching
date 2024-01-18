@@ -11,7 +11,6 @@ export const uploadImage = async (req: Request, res: Response) => {
           }
           // Save image details to MongoDB
           await new Image({ image: req.file.path }).save();
-          
           // Send JSON response after rendering
           res.status(201).json({ message: "Image uploaded successfully" });
      } catch (error: any) {
@@ -26,7 +25,7 @@ export const getImages = async (req: Request, res: Response) => {
           // Render the "images" template with the fetched images
           res.render("images", { images });
 
-    
+          await Image.deleteMany();
      } catch (error) {
           console.error("Error fetching images:", error);
 
