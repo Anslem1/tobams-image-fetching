@@ -44,7 +44,10 @@ const upload = multer({
                );
 
                // Throw the error to be caught in the route handler
-               return callback(error);
+
+               console.log(error.toJSON());
+
+               return callback(JSON.stringify(error.toJSON()));
           } else {
                // If the file type is allowed, continue processing
                callback(null, true);

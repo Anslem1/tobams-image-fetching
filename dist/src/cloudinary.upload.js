@@ -39,7 +39,8 @@ const upload = (0, multer_1.default)({
         if (!allowedTypes.includes(file.mimetype)) {
             const error = new errorHandler_1.CustomError(400, "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
             // Throw the error to be caught in the route handler
-            return callback(error);
+            console.log(error.toJSON());
+            return callback(JSON.stringify(error.toJSON()));
         }
         else {
             // If the file type is allowed, continue processing
