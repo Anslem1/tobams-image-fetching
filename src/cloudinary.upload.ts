@@ -21,9 +21,6 @@ const multerStorageEngine = new CloudinaryStorage({
 });
 
 
-console.log(process.env.CLOUDINARY_CLOUD_NAME);
-console.log(process.env.CLOUDINARY_KEY);
-console.log(process.env.CLOUDINARY_SECRET);
 
 // Create multer middleware with Cloudinary storage engine and file type validation
 
