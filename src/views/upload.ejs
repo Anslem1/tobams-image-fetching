@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-        }
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <title>Upload Page</title>
+          <style>
+               body {
+                    font-family: "Arial", sans-serif;
+                    margin: 20px;
+               }
 
-        h1 {
-            color: #333;
-        }
+               h1 {
+                    color: #333;
+               }
 
-        form {
-            max-width: 400px;
-            margin: 20px 0;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+               form {
+                    max-width: 400px;
+                    margin: 20px 0;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background-color: #fff;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
+          
 
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
+               input[type="file"] {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    box-sizing: border-box;
+               }
 
-        button {
-            background-color: #4285f4;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+               button {
+                    background-color: #4285f4;
+                    color: #fff;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+               }
 
-        button:hover {
-            background-color: #1967d2;
-        }
-    </style>
-</head>
-<body>
-    <h1>Upload Page</h1>
-  <a href="/get_images" class="button">Go to All Images</a>
+               button:hover {
+                    background-color: #1967d2;
+               }
+          </style>
+     </head>
+     <body>
+          <h1>Upload Page</h1>
+          <a href="/get_image" class="button">Go to All Images</a>
 
+          <div>
+               <a href="/" class="button">Go to HomePage</a>
+          </div>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+               <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    accept="image/*"
+                    required
+               />
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" id="image" accept="image/*" required>
-
-        <button type="submit">Upload Image</button>
-    </form>
-</body>
+               <button type="submit">Upload Image</button>
+          </form>
+     </body>
 </html>

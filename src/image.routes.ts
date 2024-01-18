@@ -7,7 +7,7 @@ import multer from "multer";
 const router = express.Router();
 
 // Route to get images
-router.get("/get_images", getImages);
+router.get("/get_image", getImages);
 
 
 router

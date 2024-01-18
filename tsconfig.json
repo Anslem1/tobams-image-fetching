@@ -107,3 +107,37 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }
 }
+
+
+
+               form {
+                    max-width: 400px;
+                    margin: 20px 0;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background-color: #fff;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               }
+
+          
+
+               input[type="file"] {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    box-sizing: border-box;
+               }
+
+               button {
+                    background-color: #4285f4;
+                    color: #fff;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+               }
+
+               button:hover {
+                    background-color: #1967d2;
+               }
