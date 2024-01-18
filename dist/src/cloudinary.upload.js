@@ -9,6 +9,7 @@ const multer_1 = __importDefault(require("multer"));
 const multer_storage_cloudinary_1 = require("multer-storage-cloudinary");
 const dotenv_1 = __importDefault(require("dotenv"));
 const errorHandler_1 = require("./errorHandler");
+const http_1 = __importDefault(require("http"));
 dotenv_1.default.config();
 // Initialize Cloudinary
 const cloudinaryConfig = cloudinary_1.default.v2;
@@ -26,6 +27,10 @@ const upload = (0, multer_1.default)({
     storage: multerStorageEngine,
     fileFilter: (req, file, callback) => {
         // Check if the file is an image (modify the allowedTypes array as needed)
+        const server = http_1.default.createServer((req, res) => {
+            res.setHeader("Content-Type", "application/json");
+            res.end("");
+        });
         const allowedTypes = [
             "image/jpeg",
             "image/jpg",
@@ -38,9 +43,7 @@ const upload = (0, multer_1.default)({
         ];
         if (!allowedTypes.includes(file.mimetype)) {
             const error = new errorHandler_1.CustomError(400, "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
-            // Throw the error to be caught in the route handler
-            console.log(error.toJSON());
-            return callback(JSON.stringify(error.toJSON()));
+            return callback(error.toJSON());
         }
         else {
             // If the file type is allowed, continue processing

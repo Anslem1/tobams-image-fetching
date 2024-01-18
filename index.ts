@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import ejs from "ejs";
 import path from "path";
 import imageRoutes from "./src/image.routes";
 import { CustomError, errorHandler } from "./src/errorHandler";

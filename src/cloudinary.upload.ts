@@ -3,7 +3,7 @@ import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import dotenv from "dotenv";
 import { CustomError } from "./errorHandler";
-import { Request, Response, NextFunction } from "express";
+import http from "http";
 
 dotenv.config();
 
@@ -26,6 +26,10 @@ const upload = multer({
      storage: multerStorageEngine,
      fileFilter: (req, file, callback) => {
           // Check if the file is an image (modify the allowedTypes array as needed)
+          const server = http.createServer((req, res) => {
+               res.setHeader("Content-Type", "application/json");
+               res.end("");
+          });
           const allowedTypes = [
                "image/jpeg",
                "image/jpg",
@@ -43,11 +47,7 @@ const upload = multer({
                     "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."
                );
 
-               // Throw the error to be caught in the route handler
-
-               console.log(error.toJSON());
-
-               return callback(JSON.stringify(error.toJSON()));
+               return callback(error.toJSON());
           } else {
                // If the file type is allowed, continue processing
                callback(null, true);

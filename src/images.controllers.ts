@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import Image from "./image.model";
-import { CustomError } from "./errorHandler";
 
-export const uploadImage = async (err: any, req: Request, res: Response) => {
+
+export const uploadImage = async (req: Request, res: Response) => {
      try {
           if (!req.file) {
                return res.status(400).json({
@@ -25,7 +25,6 @@ export const getImages = async (req: Request, res: Response) => {
           // Render the "images" template with the fetched images
           res.render("images", { images });
 
-          await Image.deleteMany();
      } catch (error) {
           console.error("Error fetching images:", error);
 
@@ -37,3 +36,5 @@ export const getImages = async (req: Request, res: Response) => {
           }
      }
 };
+
+
