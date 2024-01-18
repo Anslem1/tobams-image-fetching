@@ -19,7 +19,7 @@ This API allows users to upload and retrieve images.
 
 ### 2. Get Images
 
-**Route:** `GET /images`
+**Route:** `GET /get_image`
 
 **Description:** Retrieves all uploaded images.
 
