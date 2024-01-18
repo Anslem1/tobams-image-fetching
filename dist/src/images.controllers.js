@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getImages = exports.uploadImage = void 0;
 const image_model_1 = __importDefault(require("./image.model"));
-const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const uploadImage = (err, req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.file) {
             return res.status(400).json({

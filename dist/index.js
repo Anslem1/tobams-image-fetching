@@ -9,6 +9,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const image_routes_1 = __importDefault(require("./src/image.routes"));
+const errorHandler_1 = require("./src/errorHandler");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const mongoUrl = process.env.MONGO_URL;
@@ -28,11 +29,17 @@ mongoose_1.default
 app.get("/", (req, res) => {
     res.render("home");
 });
-app.use((0, cors_1.default)())
-    .use(express_1.default.json())
-    .set("view engine", "ejs")
-    .set("views", path_1.default.join(__dirname, "src", "views"))
-    .use("/", image_routes_1.default)
-    .listen(process.env.PORT, () => {
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.use(errorHandler_1.errorHandler); // Global error handler middleware
+app.set("view engine", "ejs");
+app.set("views", path_1.default.join(__dirname, "src", "views"));
+app.use("/", image_routes_1.default);
+// Catch 404 errors and forward them to the error handler
+app.use((req, res, next) => {
+    const error = new errorHandler_1.CustomError(404, "Not Found");
+    next(error);
+});
+app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
 });

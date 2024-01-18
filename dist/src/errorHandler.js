@@ -1,20 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomError = void 0;
+exports.CustomError = exports.errorHandler = void 0;
 class CustomError extends Error {
-    constructor(message) {
+    constructor(status, message) {
         super(message);
-        // Ensure the name of this error is the same as the class name
+        this.status = status;
         this.name = this.constructor.name;
-        // Capture the stack trace (excluding the constructor call)
         Error.captureStackTrace(this, this.constructor);
     }
     toJSON() {
-        // Return the error object without wrapping it
         return {
             name: this.name,
             message: this.message,
+            status: this.status, // Include the 'status' property
         };
     }
 }
 exports.CustomError = CustomError;
+const errorHandler = (err, req, res, next) => {
+    const status = err.status || 500;
+    if (res.status) {
+        return res.status(status).json({ error: err.message });
+    }
+    else {
+        // If res.status is not available, use res.json directly
+        return res.json({ error: err.message });
+    }
+};
+exports.errorHandler = errorHandler;

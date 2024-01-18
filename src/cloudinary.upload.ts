@@ -3,6 +3,8 @@ import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import dotenv from "dotenv";
 import { CustomError } from "./errorHandler";
+import { Request, Response, NextFunction } from "express";
+
 dotenv.config();
 
 // Initialize Cloudinary
@@ -34,14 +36,20 @@ const upload = multer({
                "image/webp",
                "image/heif",
           ];
+
           if (!allowedTypes.includes(file.mimetype)) {
-               const error = new Error(
+               const error = new CustomError(
+                    400,
                     "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed."
                );
-               return callback(error.message);
+
+               // Throw the error to be caught in the route handler
+               return callback(error);
+          } else {
+               // If the file type is allowed, continue processing
+               callback(null, true);
           }
-          return callback(null, true);
      },
 });
 
-export { cloudinary, upload };
+export { upload };

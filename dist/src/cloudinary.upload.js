@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.upload = exports.cloudinary = void 0;
+exports.upload = void 0;
 const cloudinary_1 = __importDefault(require("cloudinary"));
-exports.cloudinary = cloudinary_1.default;
 const multer_1 = __importDefault(require("multer"));
 const multer_storage_cloudinary_1 = require("multer-storage-cloudinary");
 const dotenv_1 = __importDefault(require("dotenv"));
+const errorHandler_1 = require("./errorHandler");
 dotenv_1.default.config();
 // Initialize Cloudinary
 const cloudinaryConfig = cloudinary_1.default.v2;
@@ -37,10 +37,14 @@ const upload = (0, multer_1.default)({
             "image/heif",
         ];
         if (!allowedTypes.includes(file.mimetype)) {
-            const error = new Error("Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
-            return callback(error.message);
+            const error = new errorHandler_1.CustomError(400, "Invalid file format. Only JPEG, JPG, PNG, GIF TIFF, BMP, WEBP, and HEIF images are allowed.");
+            // Throw the error to be caught in the route handler
+            return callback(error);
         }
-        return callback(null, true);
+        else {
+            // If the file type is allowed, continue processing
+            callback(null, true);
+        }
     },
 });
 exports.upload = upload;

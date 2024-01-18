@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cloudinary_upload_1 = require("./cloudinary.upload");
 const images_controllers_1 = require("./images.controllers");
 const router = express_1.default.Router();
-router.get("/get_images", images_controllers_1.getImages);
+router.get("/get_image", images_controllers_1.getImages);
 router
     .route("/upload")
     .get((req, res) => {

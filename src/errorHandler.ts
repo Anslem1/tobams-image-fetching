@@ -1,22 +1,37 @@
 import { NextFunction, Request, Response } from "express";
 
 class CustomError extends Error {
-     constructor(message: string) {
+     constructor(public status: number, message: string) {
           super(message);
-          // Ensure the name of this error is the same as the class name
+
           this.name = this.constructor.name;
-          // Capture the stack trace (excluding the constructor call)
+
           Error.captureStackTrace(this, this.constructor);
      }
 
      toJSON() {
-          // Return the error object without wrapping it
           return {
                name: this.name,
                message: this.message,
+               status: this.status, // Include the 'status' property
           };
      }
 }
 
+const errorHandler = (
+     err: CustomError,
+     req: Request,
+     res: Response,
+     next: NextFunction
+) => {
+     const status = err.status || 500;
 
-export { CustomError };
+     if (res.status) {
+          return res.status(status).json({ error: err.message });
+     } else {
+          // If res.status is not available, use res.json directly
+          return res.json({ error: err.message });
+     }
+};
+
+export { errorHandler, CustomError };

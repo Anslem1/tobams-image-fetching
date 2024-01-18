@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Image from "./image.model";
 import { CustomError } from "./errorHandler";
 
-export const uploadImage = async (req: Request, res: Response) => {
+export const uploadImage = async (err: any, req: Request, res: Response) => {
      try {
           if (!req.file) {
                return res.status(400).json({
